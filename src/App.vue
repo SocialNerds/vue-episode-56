@@ -2,10 +2,12 @@
 <div>
   <div>{{name}}</div>
   <div v-if="todos.length === 0">Add some todos!</div>
-  <div v-else><button v-on:click="removeCompleted">Clear</button></div>
+  <div v-else>
+    <button v-on:click="removeCompleted">Clear</button>
+  </div>
   <ul>
-    <li v-for="(data, index) in todos" :key="index">
-      <input type="checkbox" v-on:click="toggleTodo(index)" :checked="data.completed">{{data.title}}
+    <li v-for="(todo, index) in todos" :key="index">
+      <input type="checkbox" v-on:click="toggleTodo(index)" :checked="todo.completed">{{todo.title}}
       <button v-on:click="removeTodo(index)">X</button>
     </li>
   </ul>
@@ -18,13 +20,12 @@
 
 <script>
 export default {
-  name: 'App',
   data() {
     return {
-      name: 'Hello darkness my old friend!',
+      name: 'SocialNerds Todo App!',
       title: '',
       todos: [
-        {title: 'Fix some bugs', completed: false}
+        {title: 'Fix some bugs', completed: false},
       ]
     }
   },
@@ -38,7 +39,7 @@ export default {
     removeTodo(index) {
       this.todos.splice(index, 1);
     },
-    removeCompleted(index) {
+    removeCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed);
     },
     toggleTodo(index) {
@@ -48,5 +49,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>
